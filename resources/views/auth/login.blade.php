@@ -22,7 +22,7 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div>
-                Doesn't have account? <a href="/register">Join us now</a>
+                Don't have account? <a href="/register">Join us now</a>
             </div>
         </div>
     </div>

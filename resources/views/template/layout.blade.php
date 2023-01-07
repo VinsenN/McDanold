@@ -13,7 +13,7 @@
     <link href="{{ URL::asset('image/icon.svg') }}" rel="icon">
 </head>
 
-<body>
+<body class="d-flex flex-column justify-content-between vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #DA291C">
         <div class="container-fluid mx-3">
             <a class="navbar-brand" href="/">
@@ -77,7 +77,9 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="h-100">
+        @yield('content')
+    </div>
 
     <div class="container">
         <footer class="py-3 my-4">
