@@ -57,6 +57,7 @@
                     <label for="dob">Date of Birth: </label>
                     <input type="date" id="dob" name="date_of_birth">
                 </div>
+
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
             <div>

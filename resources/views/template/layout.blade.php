@@ -62,7 +62,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"
                             data-bs-toggle="dropdown" aria-expanded="true">
-                            <img src="https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg"
+                            <img src="https://i.kym-cdn.com/photos/images/newsfeed/002/229/102/5c5.jpg"
                                 alt="mdo" width="25" height="25" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small shadow text-secondary"
