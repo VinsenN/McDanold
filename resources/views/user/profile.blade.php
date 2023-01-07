@@ -1,8 +1,19 @@
 @extends('template.layout')
 
 @section('content')
-    <main class="container pb-5">
-        <div class="row py-3">
+    @if (session()->has('success'))
+        <div class="toast align-items-center show my-0 mx-auto mt-3" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body text-success fw-bold">
+                    Success Message
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
+    <main class="container pt-0 pb-5">
+        <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle border-dark my-3" width="200px" height="200px"
@@ -13,7 +24,7 @@
                     <form action="http://google.com">
                         @csrf
                         <label class="btn btn-primary">
-                            <input type="file" onchange="form.submit()" style="display: none"/>
+                            <input type="file" onchange="form.submit()" style="display: none" />
                             <i class="fa fa-cloud-upload"></i> Upload Image
                         </label>
                     </form>
