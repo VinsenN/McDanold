@@ -13,7 +13,7 @@
     <link href="{{ URL::asset('image/icon.svg') }}" rel="icon">
 </head>
 
-<body class="d-flex flex-column justify-content-between vh-100">
+<body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #DA291C">
         <div class="container-fluid mx-3">
             <a class="navbar-brand" href="/">
@@ -77,11 +77,9 @@
         </div>
     </nav>
 
-    <div class="h-100">
-        @yield('content')
-    </div>
+    @yield('content')
 
-    <div class="container">
+    <div class="container mt-auto">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item px-2 text-muted">2440017126 - Vio Albert Ferdinand</a></li>
