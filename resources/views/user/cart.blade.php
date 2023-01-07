@@ -8,6 +8,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Menu</th>
                     <th scope="col"></th>
+                    <th scope="col">Size</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Total Price</th>
@@ -20,6 +21,7 @@
                         <td><img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" class="img-fluid rounded-start"
                                 alt="..." style="height: 3vw; width: auto;"></td>
                         <td>Vaporeon {{ $i }}</td>
+                        <td>Big</td>
                         <td>IDR 10000</td>
                         <td>5</td>
                         <td>IDR 50000</td>
@@ -27,7 +29,7 @@
                 @endfor
                 <tr class="align-middle">
                     <th scope="row">Total</th>
-                    <td colspan="4"></td>
+                    <td colspan="5"></td>
                     <td class="fw-bold">IDR 300000</td>
                 </tr>
             </tbody>
