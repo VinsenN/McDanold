@@ -3,17 +3,35 @@
 @section('content')
     <div class="container-fluid pt-5">
         <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky sidebar-sticky">
-                    <nav class="nav flex-column">
-                        <a class="nav-link text-dark fw-bold border border-end-0" href="#">Food X</a>
-                        <a class="nav-link text-dark" href="#">Food Y</a>
-                        <a class="nav-link text-dark" href="#">Food Z</a>
-                        <a class="nav-link text-dark" href="#">Food Sus</a>
-                        <a class="nav-link text-dark" href="#">Drink</a>
-                    </nav>
+            <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex sticky-sm-top">
+                <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3">
+                    <ul class="nav flex-sm-column flex-column flex-nowrap overflow-auto w-100 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+                        <h4 class="mb-3 w-100 text-center text-md-start">Categories</h4>
+
+                        <li class="nav-item w-100 px-2 py-1 rounded-2" style="background-color: #DA291C">
+                            <a href="#" class="nav-link px-sm-0 px-2 text-light text-center text-md-start">Food X</a>
+                        </li>
+
+                        <li class="nav-item w-100 px-2 py-1 rounded-2">
+                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Y</a>
+                        </li>
+
+                        <li class="nav-item w-100 px-2 py-1 rounded-2">
+                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Z</a>
+                        </li>
+
+                        <li class="nav-item w-100 px-2 py-1 rounded-2">
+                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Sus</a>
+                        </li>
+
+                        <li class="nav-item w-100 px-2 py-1 rounded-2">
+                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Drinks</a>
+                        </li>
+
+                    </ul>
                 </div>
-            </nav>
+            </div>
+
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h2>Food Y</h2>
                 <div class="row row-cols-1 row-cols-md-5 g-4">
