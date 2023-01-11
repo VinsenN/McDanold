@@ -23,22 +23,16 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
                                         <th scope="col">Menu</th>
-                                        <th scope="col"></th>
                                         <th scope="col">Size</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total Price</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for ($j = 1; $j <= 3; $j++)
                                         <tr class="align-middle">
-                                            <th scope="row">{{ $i }}</th>
-                                            <td><img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg"
-                                                    class="img-fluid rounded-start" alt="..."
-                                                    style="height: 3vw; width: auto;"></td>
                                             <td>Vaporeon {{ $j }}</td>
                                             <td>Big</td>
                                             <td>IDR 10000</td>
@@ -47,8 +41,8 @@
                                         </tr>
                                     @endfor
                                     <tr class="align-middle">
-                                        <th scope="row">Total</th>
-                                        <td colspan="5"></td>
+                                        <th scope="row">Sum</th>
+                                        <td colspan="3"></td>
                                         <td class="fw-bold">IDR 300000</td>
                                     </tr>
                                 </tbody>

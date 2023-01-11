@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex sticky-sm-top">
                 <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3">
-                    <ul class="nav flex-sm-column flex-column flex-nowrap overflow-auto w-100 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+                    <ul class="nav flex-sm-column flex-column flex-nowrap overflow-auto w-100 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+                        id="menu">
                         <h4 class="mb-3 w-100 text-center text-md-start">Categories</h4>
 
                         <li class="nav-item w-100 px-2 py-1 rounded-2" style="background-color: #DA291C">
@@ -41,7 +42,8 @@
                                 <img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" class="card-img-top mx-auto"
                                     alt="..." style="height: 10vw; width: 10vw;">
                                 <div class="card-body">
-                                    <a href="/menu/{{ $i }}" class="stretched-link text-decoration-none text-dark">
+                                    <a href="/menu/view/{{ $i }}"
+                                        class="stretched-link text-decoration-none text-dark">
                                         <p class="card-title fw-bold mb-0">Vaporeon {{ $i }}</p>
                                         <p class="card-text">Rp 10.000</p>
                                     </a>
