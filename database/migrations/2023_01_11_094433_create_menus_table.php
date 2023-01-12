@@ -21,6 +21,7 @@ class CreateMenusTable extends Migration
             $table->string('photo');
             $table->integer('is_recommended');
             $table->foreignId('category_id');
+            $table->softDeletes();
 
             $table->timestamps();
         });
