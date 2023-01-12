@@ -4,6 +4,12 @@
     <div class="mx-auto mt-5 w-50">
         <div class="container">
             <form class="py-3">
+                @csrf
+                @if (session()->has('success'))
+                    <div class="alert alert-success text-center" role="alert">
+                        <span class="fw-bold"> Register Success {{ session()->get('success') }} </span>
+                    </div>
+                @endif
                 <div class="mb-3 fw-bold text-center">
                     Login Form
                 </div>
