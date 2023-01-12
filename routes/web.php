@@ -20,10 +20,12 @@ Route::get('/', function () {
 });
 
 Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store']) -> name('guest.RegisterData');
+Route::post('/register', [RegisterController::class, 'store'])->name('guest.RegisterData');
 
 Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [RegisterController::class, 'store']);
+Route::post('/login', [LoginController::class, 'check'])->name('guest.LoginData');;
+
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/menu', function () {
     return view('menu.view');

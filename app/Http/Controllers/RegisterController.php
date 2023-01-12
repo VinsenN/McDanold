@@ -30,6 +30,7 @@ class RegisterController extends Controller
         $user->password = Hash::make($validated['password']);
         $user->gender = $validated['gender'];
         $user->date_of_birth = $validated['date_of_birth'];
+        $user->role = 'user';
         $user->save();
 
         return redirect('/login')->with('success', 'Account Registration Success');
