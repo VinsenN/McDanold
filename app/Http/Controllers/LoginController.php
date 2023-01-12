@@ -19,11 +19,10 @@ class LoginController extends Controller
             "email" => "required|email",
             "password" => "required|alpha_num",
         ]);
-        $remember = $request->RememberMe ? true : false;
 
         $cred = $request->only('email', 'password');
-        if (Auth::attempt($cred, $remember)) {
-            if ($remember == true) {
+        if (Auth::attempt($cred)) {
+            if ($request->rememberMe != null) {
                 Cookie::queue('last_email_log', $request->email, 3 * 60);
                 Cookie::queue('last_pass_log', $request->password, 3 * 60);
             }
@@ -31,11 +30,11 @@ class LoginController extends Controller
 
             return redirect()->intended('/');
         }
-        return back()->withErrors('');
+        return back()->withErrors(['invalidCred' => 1]);
     }
     public function logout()
     {
         Auth::logout();
-        return redirect()->back();
+        return redirect('/');
     }
 }

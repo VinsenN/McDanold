@@ -19,14 +19,6 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store'])->name('guest.RegisterData');
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'check'])->name('guest.LoginData');;
-
-Route::get('/logout', [LoginController::class, 'logout']);
-
 Route::get('/menu', function () {
     return view('menu.view');
 });
@@ -35,22 +27,30 @@ Route::get('/menu/view/{id}', function () {
     return view('menu.viewProduct');
 });
 
-Route::get('/order', function () {
-    return view('user.order');
-});
-
 Route::get('/about-us', function () {
     return view('user.about-us');
 });
 
-Route::get('/cart', function () {
-    return view('user.cart');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('guest.RegisterData');
+
+    Route::get('/login', [LoginController::class, 'index']);
+    Route::post('/login', [LoginController::class, 'check'])->name('guest.LoginData');;
 });
 
-Route::get('/history', function () {
-    return view('user.history');
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/profile', function () {
-    return view('user.profile');
+    Route::get('/cart', function () {
+        return view('user.cart');
+    });
+
+    Route::get('/profile', function () {
+        return view('user.profile');
+    });
+
+    Route::get('/order', function () {
+        return view('user.order');
+    });
 });
