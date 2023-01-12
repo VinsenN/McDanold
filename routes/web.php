@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('user.home');
 });
 
+Route::get('/home', function () {
+    return redirect('/');
+});
+
 Route::get('/menu', function () {
     return view('menu.view');
 });
@@ -35,7 +39,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'index']);
     Route::post('/register', [RegisterController::class, 'store'])->name('guest.RegisterData');
 
-    Route::get('/login', [LoginController::class, 'index']);
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'check'])->name('guest.LoginData');;
 });
 
@@ -52,5 +56,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/order', function () {
         return view('user.order');
+    });
+
+    Route::middleware(['role:user'])->group(function () {
+    });
+    Route::middleware(['role:admin'])->group(function () {
     });
 });
