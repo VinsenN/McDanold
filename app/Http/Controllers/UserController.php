@@ -41,7 +41,7 @@ class UserController extends Controller
 
         $updateUser->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Update picture profile success');
     }
     public function updateInfo(Request $request)
     {
