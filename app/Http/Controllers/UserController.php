@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -41,69 +43,33 @@ class UserController extends Controller
 
         return redirect()->back();
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updateInfo(Request $request)
     {
-        //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function updatePassword(Request $request)
     {
-        //
-    }
+        $validator = Validator::make($request->all(), [
+            'currentPassword' => 'required|alpha_num',
+            'newPassword' => 'required|alpha_num|min:8|required_with:confirmNewPassword',
+            'confirmNewPassword' => 'required|alpha_num|min:8|same:newPassword'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($validator->fails()) {
+            $validator->errors()->add('password', '1');
+            return redirect()->back()->withErrors($validator);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $validated = $request -> all();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $updateUser = User::find(auth()->user()->id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if (Hash::check($validated['currentPassword'], $updateUser->password)) {
+            return redirect()->back()->withErrors(['passwordFailMatch' => '1']);
+        }
+
+        $updateUser->password = $validated['newPassword'];
+        $updateUser->save();
+
+        return redirect()->back();
     }
 }

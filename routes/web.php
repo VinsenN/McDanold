@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [UserController::class, 'index']);
     Route::post('/profile/update/image', [UserController::class, 'updateImage']) -> name('user.updateImage');
+    Route::post('/profile/update/info', [UserController::class, 'updateInfo']) -> name('user.updateInfo');
+    Route::post('/profile/update/password', [UserController::class, 'updatePassword']) -> name('user.updatePassword');
 
     Route::get('/cart', function () {
         return view('user.cart');
