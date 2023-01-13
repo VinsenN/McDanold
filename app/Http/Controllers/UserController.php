@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -16,6 +18,29 @@ class UserController extends Controller
         return view('user.profile');
     }
 
+    public function updateImage(Request $request)
+    {
+        $validated = $request->validate([
+            "file" => "required|mimes:jpeg,jpg,png",
+        ]);
+
+        $updateUser = User::find(auth()->user()->id);
+
+        $imageFile = $validated['file'];
+
+        if ($updateUser->image_path != NULL) {
+            Storage::delete('public/images/' . $updateUser->image_path);
+        }
+
+        $imageName = 'profile' . time() . '.' . $imageFile->getClientOriginalExtension();
+        $updateUser->image_path = $imageName;
+
+        Storage::putFileAs('public/images', $imageFile, $imageName);
+
+        $updateUser->save();
+
+        return redirect()->back();
+    }
     /**
      * Show the form for creating a new resource.
      *

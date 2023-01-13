@@ -17,16 +17,15 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle border-dark my-3" width="200px" height="200px"
-                        src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }}">
-                        @else '/storage/images/'.auth()->user()->image_path @endif
+                        src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }} @else /storage/images/{{auth()->user()->image_path}} @endif">
+
                     <p class="font-weight-bold
                         mb-2">{{ auth()->user()->name }}</p>
                     <p class="text-black-50">{{ auth()->user()->email }}</p>
-
-                    <form action="http://google.com">
+                    <form method="POST" action="{{ route('user.updateImage') }}" enctype="multipart/form-data">
                         @csrf
                         <label class="btn btn-primary">
-                            <input type="file" onchange="form.submit()" style="display: none" />
+                            <input type="file" onchange="form.submit()" style="display: none" name="file">
                             <i class="fa fa-cloud-upload"></i> Upload Image
                         </label>
                     </form>
