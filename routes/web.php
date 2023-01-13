@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,13 +47,12 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 
+    Route::get('/profile', [UserController::class, 'index']);
+
     Route::get('/cart', function () {
         return view('user.cart');
     });
 
-    Route::get('/profile', function () {
-        return view('user.profile');
-    });
 
     Route::get('/order', function () {
         return view('user.order');

@@ -17,9 +17,11 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle border-dark my-3" width="200px" height="200px"
-                        src="https://i.kym-cdn.com/photos/images/newsfeed/002/229/102/5c5.jpg">
-                    <p class="font-weight-bold mb-2">John Xina</p>
-                    <p class="text-black-50">johnxina@gmail.com</p>
+                        src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }}">
+                        @else '/storage/images/'.auth()->user()->image_path @endif
+                    <p class="font-weight-bold
+                        mb-2">{{ auth()->user()->name }}</p>
+                    <p class="text-black-50">{{ auth()->user()->email }}</p>
 
                     <form action="http://google.com">
                         @csrf
@@ -32,10 +34,11 @@
             </div>
             <div class="col-md-5 border-right py-5">
                 <p class="fs-2 fw-bold">Profile</p>
-                <p><span class="fw-bold">Email: </span>johnxina@gmail.com</p>
-                <p><span class="fw-bold">Name: </span>John Wok Xina</p>
-                <p><span class="fw-bold">Gender: </span>Male</p>
-                <p><span class="fw-bold">Date Of Birth: </span>2022/02/02</p>
+                <p><span class="fw-bold">Email: </span>{{ auth()->user()->email }}</p>
+                <p><span class="fw-bold">Name: </span>{{ auth()->user()->name }}</p>
+                <p><span class="fw-bold">Gender: </span>{{ auth()->user()->gender }}</p>
+                <p><span class="fw-bold">Date Of Birth:
+                    </span>{{ \Carbon\Carbon::parse(auth()->user()->date_of_birth)->format('d/m/Y') }}</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Update
                     Profile</button>
                 <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"
