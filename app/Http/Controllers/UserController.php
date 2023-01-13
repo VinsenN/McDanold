@@ -45,6 +45,26 @@ class UserController extends Controller
     }
     public function updateInfo(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            "name" => "required|min:5",
+            "gender" => "required",
+            "date_of_birth" => "required|before:today",
+        ]);
+
+        if ($validator->fails()) {
+            $validator->errors()->add('info', '1');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $validated = $request->all();
+
+        $updateUser = User::find(auth()->user()->id);
+        $updateUser->name = $validated['name'];
+        $updateUser->gender = $validated['gender'];
+        $updateUser->date_of_birth = $validated['date_of_birth'];
+        $updateUser->save();
+
+        return redirect()->back()->with('success', 'Update profile success');
     }
     public function updatePassword(Request $request)
     {
@@ -59,7 +79,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        $validated = $request -> all();
+        $validated = $request->all();
 
         $updateUser = User::find(auth()->user()->id);
 
@@ -67,7 +87,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors(['passwordFailMatch' => '1']);
         }
 
-        $updateUser->password = $validated['newPassword'];
+        $updateUser->password = Hash::make($validated['newPassword']);
         $updateUser->save();
 
         return redirect()->back()->with('success', 'Update password success');
