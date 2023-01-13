@@ -14,7 +14,7 @@
 
     <main class="container pt-0 pb-5">
         <div class="row">
-            <div class="col-md-3 border-right">
+            <div class="col-md-3 me-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle border-dark my-3" width="200px" height="200px"
                         src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }} @else /storage/images/{{ auth()->user()->image_path }} @endif">
@@ -31,13 +31,13 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-5 border-right py-5">
+            <div class="col-md-7 border-right py-5">
                 <p class="fs-2 fw-bold">Profile</p>
                 <p><span class="fw-bold">Email: </span>{{ auth()->user()->email }}</p>
                 <p><span class="fw-bold">Name: </span>{{ auth()->user()->name }}</p>
                 <p><span class="fw-bold">Gender: </span>{{ auth()->user()->gender }}</p>
                 <p><span class="fw-bold">Date Of Birth:
-                    </span>{{ \Carbon\Carbon::parse(auth()->user()->date_of_birth)->format('d/m/Y') }}</p>
+                    </span>{{ \Carbon\Carbon::parse(auth()->user()->date_of_birth)->format('m/d/Y') }}</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Update
                     Profile</button>
                 <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"
