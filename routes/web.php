@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +19,8 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/register', function () {
-    return view('auth.register');
+Route::get('/home', function () {
+    return redirect('/');
 });
 
 Route::get('/menu', function () {
@@ -32,22 +31,35 @@ Route::get('/menu/view/{id}', function () {
     return view('menu.viewProduct');
 });
 
-Route::get('/order', function () {
-    return view('user.order');
-});
-
 Route::get('/about-us', function () {
     return view('user.about-us');
 });
 
-Route::get('/cart', function () {
-    return view('user.cart');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('guest.RegisterData');
+
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'check'])->name('guest.LoginData');;
 });
 
-Route::get('/history', function () {
-    return view('user.history');
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/profile', function () {
-    return view('user.profile');
+    Route::get('/cart', function () {
+        return view('user.cart');
+    });
+
+    Route::get('/profile', function () {
+        return view('user.profile');
+    });
+
+    Route::get('/order', function () {
+        return view('user.order');
+    });
+
+    Route::middleware(['role:user'])->group(function () {
+    });
+    Route::middleware(['role:admin'])->group(function () {
+    });
 });

@@ -34,10 +34,12 @@
                         <a class="nav-link {{ Request::is('menu*') ? 'active' : '' }}" aria-current="page"
                             href="/menu">Menu</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('order*') ? 'active' : '' }}" aria-current="page"
-                            href="/order">Order</a>
-                    </li>
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('order*') ? 'active' : '' }}" aria-current="page"
+                                href="/order">Order</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('about-us*') ? 'active' : '' }}" aria-current="page"
                             href="/about-us">About Us</a>
@@ -46,32 +48,36 @@
 
                 <ul
                     class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center justify-content-center justify-content-lg-start">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
-                            href="/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" aria-current="page"
-                            href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/cart">
-                            <i class="bi bi-cart"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"
-                            data-bs-toggle="dropdown" aria-expanded="true">
-                            <img src="https://i.kym-cdn.com/photos/images/newsfeed/002/229/102/5c5.jpg"
-                                alt="mdo" width="25" height="25" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small shadow text-secondary"
-                            style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34.4px, 0px);"
-                            data-popper-placement="bottom-end">
-                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
-                        </ul>
-                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
+                                href="/register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" aria-current="page"
+                                href="/login">Login</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/cart">
+                                <i class="bi bi-cart"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#"
+                                class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"
+                                data-bs-toggle="dropdown" aria-expanded="true">
+                                <img src="https://i.kym-cdn.com/photos/images/newsfeed/002/229/102/5c5.jpg"
+                                    alt="mdo" width="25" height="25" class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small shadow text-secondary"
+                                style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34.4px, 0px);"
+                                data-popper-placement="bottom-end">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
