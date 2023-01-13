@@ -2,33 +2,25 @@
 
 @section('content')
     @if (session()->has('success'))
-        <!-- <button data-bs-toggle="modal" data-bs-target="#messageModal">testing kata-kata</button> -->
+        <div data-bs-toggle="modal" data-bs-target="#successModal"></div>
+
         <script>
             window.onload = () => {
-                document.querySelector('[data-bs-target="#messageModal"]');
+                document.querySelector('[data-bs-target="#successModal"]').click();
             }
         </script>
 
-        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel"
-                    aria-hidden="true">
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <span class="fw-bold">{{ session()->get('success') }}</span>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="successModalLabel">{{ session()->get('success') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         </div>
-
-        <!-- <div class="toast align-items-center show my-0 mx-auto mt-3" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body text-success fw-bold">
-                    {{ session()->get('success') }}
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div> -->
     @endif
-
     <main class="container pt-0 pb-5">
         <div class="row">
             <div class="col-md-3 me-3 border-right">
