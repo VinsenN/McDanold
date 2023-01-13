@@ -14,7 +14,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="successModalLabel">{{ session()->get('success') }}</h1>
+                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
