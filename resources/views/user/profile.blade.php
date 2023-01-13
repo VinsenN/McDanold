@@ -5,7 +5,7 @@
         <div class="toast align-items-center show my-0 mx-auto mt-3" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body text-success fw-bold">
-                    Success Message
+                    {{ session()->get('success') }}
                 </div>
                 <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -41,8 +41,8 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Update
                     Profile</button>
                 <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"
-                    data-bs-target="#passwordModal">Update
-                    Password</button>
+                    data-bs-target="#passwordModal">Update Password</button>
+
 
                 <script>
                     @error('info')

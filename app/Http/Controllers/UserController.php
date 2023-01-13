@@ -70,6 +70,6 @@ class UserController extends Controller
         $updateUser->password = $validated['newPassword'];
         $updateUser->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Update password success');
     }
 }
