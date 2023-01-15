@@ -56,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
         return view('user.cart');
     });
 
+    Route::get('/menu/add', function () {
+        return view('menu.manage.addProduct');
+    });
 
     Route::get('/order', function () {
         return view('user.order');

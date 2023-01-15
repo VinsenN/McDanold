@@ -1,7 +1,25 @@
 @extends('template.layout')
 
 @section('content')
-    <div class="container-fluid pt-5">
+    {{-- @if (auth()->user()->role == 'admin') --}}
+    <div class="container-fluid pt-4">
+        <div class="row">
+            <div class="col-8">
+                <form action="">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter Menu Name"
+                            aria-label="Enter Menu Name" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4">
+                <a href="/menu/add" class="btn btn-success float-end me-2">Add Menu</a>
+            </div>
+        </div>
+    </div>
+    {{-- @endif --}}
+    <div class="container-fluid pt-2">
         <div class="row">
             <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex sticky-sm-top">
                 <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3">
@@ -44,7 +62,7 @@
                                 <div class="card-body">
                                     <a href="/menu/view/{{ $i }}"
                                         class="stretched-link text-decoration-none text-dark">
-                                        <p class="card-title fw-bold mb-0">Vaporeon {{ $i }}</p>
+                                        <p class="card-title fw-bold mb-0">Vaporeon {{ $i }} </p>
                                         <p class="card-text">Rp 10.000</p>
                                     </a>
                                 </div>
