@@ -40,11 +40,6 @@ class MenuController extends Controller
         return view('menu.view')->with('menus', $menus)->with('query', $query)->with('cat', $category);
     }
 
-
-
-
-
-
     public function indexMenu($id)
     {
         $menu = Menu::find($id);
