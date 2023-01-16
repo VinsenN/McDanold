@@ -33,7 +33,7 @@
     </div>
     <div class="container my-5">
         <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-2" src="{{ URL::asset('image/icon.svg') }}" alt="" width="72"
+            <img class="d-block mx-auto mb-2" src="{{ URL::asset('image/logo.png') }}" alt="" width="72"
                 height="57">
             <h1 class="display-5 fw-bold">Mc Danold</h1>
             <div class="col-lg-6 mx-auto">

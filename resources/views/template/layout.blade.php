@@ -10,14 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"
         crossorigin="anonymous">
 
-    <link href="{{ URL::asset('image/icon.svg') }}" rel="icon">
+    <link href="{{ URL::asset('image/logo.png') }}" rel="icon">
 </head>
 
 <body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #DA291C">
         <div class="container-fluid mx-3">
             <a class="navbar-brand" href="/">
-                <img src="{{ URL::asset('image/icon.svg') }}" alt="" width="32" height="32">
+                <img src="{{ URL::asset('image/logo.png') }}" alt="" width="32" height="32">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
