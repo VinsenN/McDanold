@@ -21,7 +21,7 @@
     {{-- @endif --}}
     <div class="container-fluid pt-2">
         <div class="row">
-            <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex sticky-sm-top">
+            <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex">
                 <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3">
                     <ul class="nav flex-sm-column flex-column flex-nowrap overflow-auto w-100 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
                         id="menu">
