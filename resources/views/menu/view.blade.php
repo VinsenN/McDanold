@@ -9,7 +9,7 @@
                         <input type="text" class="form-control" placeholder="Enter Menu Name" aria-label="Enter Menu Name"
                             aria-describedby="button-addon2" name="name"
                             value="@if (isset($query['name'])) {{ $query['name'] }} @endif">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
                     </div>
                 </form>
             </div>
@@ -97,7 +97,7 @@
                     @endempty
                 </h2>
                 <div class="row row-cols-1 row-cols-md-5 g-4">
-                    @foreach ($menus as $menu)
+                    @forelse ($menus as $menu)
                         <div class="col">
                             <div class="card w-100">
                                 <div
@@ -126,7 +126,11 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div>
+                            No Product
+                        </div>
+                    @endforelse
                 </div>
 
                 @php
