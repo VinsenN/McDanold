@@ -101,18 +101,21 @@
                         <div class="col">
                             <div class="card w-100">
                                 <div
-                                    class="card-body d-flex flex-md-column justify-content-between align-items-center w-100 mx-1 p-0 text-center">
-                                    <a href="/menu/view/{{ $menu->id }}" class="text-decoration-none text-dark w-100">
-                                        <img src="/storage/images/{{ $menu->photo }}"
-                                            class="card-img-top mx-auto w-75 py-3" alt="...">
-                                        <div class="d-flex flex-column">
-                                            <p class="card-title fw-bold mb-0"> {{ $menu->name }} @if ($menu->is_recommended)
-                                                    <i class="bi bi-fire text-danger"></i>
-                                                @endif
+                                    class="card-body d-flex flex-column justify-content-between align-items-center w-100 mx-1 px-0 text-center">
+                                    <a href="/menu/view/{{ $menu->id }}" class="text-decoration-none text-dark w-100 mb-3">
+                                        <div class="d-block mx-auto w-75 m-0 mb-2 p-0 border border-dark"
+                                             id="menu-image">
+                                            <img src="/storage/images/{{ $menu->photo }}"
+                                                class="card-img-top mx-auto w-100 h-100" alt="...">
+                                        </div>
+                                        <div class="d-flex flex-column me-2">
+                                            <p class="card-title fw-bold m-0 d-block text-truncate text-center">
+                                                @if ($menu->is_recommended) <i class="bi bi-fire text-danger"></i> @endif {{ $menu->name }}
                                             </p>
                                             <p class="card-text">IDR {{ $menu->price }}</p>
                                         </div>
                                     </a>
+                                    @if (Auth::check() && auth()->user()->role == 'admin')
                                     <div class="d-flex pt-md-4 mb-4">
                                         <a href="/menu/{{ $menu->id }}/update" class="btn btn-warning me-2"><i
                                                 class="bi bi-pencil-square"></i></a>
@@ -123,6 +126,7 @@
                                                     class="bi bi-trash"></i></button>
                                         </form>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
