@@ -1,6 +1,27 @@
 @extends('template.layout')
 
 @section('content')
+    @if (session()->has('success'))
+        <div data-bs-toggle="modal" data-bs-target="#successModal"></div>
+
+        <script>
+            window.onload = () => {
+                document.querySelector('[data-bs-target="#successModal"]').click();
+            }
+        </script>
+
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i
+                                class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="container py-5">
         <table class="table">
             <thead>
@@ -13,22 +34,47 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 3; $i++)
+                @php
+                    $totalPrice = 0;
+                    $exist = null;
+                @endphp
+                @foreach ($order->orderDetails as $orderDetail)
                     <tr class="align-middle">
-                        <td>Vaporeon {{ $i }}</td>
-                        <td>Big</td>
-                        <td>IDR 10000</td>
-                        <td>5</td>
-                        <td class="text-danger"><i class="bi bi-trash3-fill"></i></td>
+                        @php
+                            $multiplier = 1;
+                            if ($orderDetail->size == 'Large') {
+                                $multiplier = 2;
+                            }
+                            $price = $orderDetail->quantity * ($orderDetail->menu->price * $multiplier);
+                            $totalPrice += $price;
+                            $exist = 1;
+                        @endphp
+                        <td> {{ $orderDetail->menu->name }} </td>
+                        <td> {{ $orderDetail->size }}</td>
+                        <td>IDR {{ $price }}</td>
+                        <td>{{ $orderDetail->quantity }} </td>
+                        <td>
+                            <form action="{{ route('user.removeCart', ['id' => $orderDetail->id]) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <button type="submit"
+                                    class="bi bi-trash3-fill text-danger border-0 bg-transparent"></button>
+                            </form>
+                        </td>
                     </tr>
-                @endfor
+                @endforeach
                 <tr class="align-middle">
                     <th scope="row">Sum</th>
                     <td colspan="3"></td>
-                    <td class="fw-bold">IDR 300000</td>
+                    <td class="fw-bold">IDR {{ $totalPrice }}</td>
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-success float-end">Purchase</button>
+
+        <form action="{{ route('user.purchaseCart') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <button type="submit" class="btn btn-success float-end"
+                @empty($exist) disabled @endempty>Purchase</button>
+        </form>
     </div>
 @endsection

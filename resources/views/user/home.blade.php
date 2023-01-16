@@ -13,12 +13,8 @@
         <div class="carousel-inner">
             @for ($i = 1; $i <= 3; $i++)
                 <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
-                    <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/12/12/905998228.jpeg"
+                    <img src="/image/carousel/carousel-{{ $i }}.jpg"
                         class="d-block w-100" alt="" height="500px" width=auto>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $i }} slide label</h5>
-                        <p>Some representative placeholder content for the {{ $i }} slide.</p>
-                    </div>
                 </div>
             @endfor
         </div>
@@ -33,18 +29,25 @@
     </div>
     <div class="container my-5">
         <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-2" src="{{ URL::asset('image/icon.svg') }}" alt="" width="72"
+            <img class="d-block mx-auto mb-2" src="{{ URL::asset('image/logo.png') }}" alt="" width="72"
                 height="57">
-            <h1 class="display-5 fw-bold">Mc Danold</h1>
+            <h1 class="display-5 fw-bold">McDanold</h1>
             <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Welcome to Mc Danold Application Bla Bla Bla... (Lengkapin Nanti)</p>
+                <p class="lead mb-4">Providing the best meal you've ever tasted.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <a href="/menu" type="button" class="btn btn-danger btn-lg px-4 gap-3">Order Here</a>
                 </div>
             </div>
         </div>
-        <div>
-            <p>Palingan lengkapi dengan attribut lainnya</p>
+        <hr>
+        <div class="px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">About Us</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Founded in 1955, McDanold has become the most popular burger chain restaurant of all time.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="/about-us" type="button" class="btn btn-danger btn-lg px-4 gap-3">Learn more</a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

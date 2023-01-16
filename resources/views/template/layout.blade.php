@@ -9,15 +9,15 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet"
         crossorigin="anonymous">
-
-    <link href="{{ URL::asset('image/icon.svg') }}" rel="icon">
+    <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('image/logo.png') }}" rel="icon">
 </head>
 
 <body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #DA291C">
         <div class="container-fluid mx-3">
             <a class="navbar-brand" href="/">
-                <img src="{{ URL::asset('image/icon.svg') }}" alt="" width="32" height="32">
+                <img src="{{ URL::asset('image/logo.png') }}" alt="" width="32" height="32">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -47,7 +47,7 @@
                 </ul>
 
                 <ul
-                    class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center justify-content-center justify-content-lg-start">
+                    class="navbar-nav mb-2 mb-lg-0 d-flex align-items-sm-center justify-content-center justify-content-lg-start">
                     @if (!Auth::check())
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
@@ -58,11 +58,13 @@
                                 href="/login">Login</a>
                         </li>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/cart">
-                                <i class="bi bi-cart"></i>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'user')
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/cart">
+                                    <i class="bi bi-cart"></i>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a href="#"
                                 class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"

@@ -46,7 +46,7 @@
                 <p><span class="fw-bold">Name: </span>{{ auth()->user()->name }}</p>
                 <p><span class="fw-bold">Gender: </span>{{ auth()->user()->gender }}</p>
                 <p><span class="fw-bold">Date Of Birth:
-                    </span>{{ \Carbon\Carbon::parse(auth()->user()->date_of_birth)->format('m/d/Y') }}</p>
+                    </span>{{ \Carbon\Carbon::parse(auth()->user()->date_of_birth)->format('l, m/d/Y') }}</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Update
                     Profile</button>
                 <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal"

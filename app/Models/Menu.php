@@ -11,7 +11,7 @@ class Menu extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $guarded = [];
 

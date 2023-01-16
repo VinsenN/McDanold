@@ -1,0 +1,9 @@
+#menu-image {
+    height: 11rem;
+}
+
+@media (max-width: 768px) {
+    #menu-image {
+        height: 30rem;
+    }
+}
