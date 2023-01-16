@@ -16,17 +16,28 @@ class MenuController extends Controller
         View::share('categories', $categories);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $menus = Menu::get();
-        return view('menu.view')->with('menus', $menus);
+        $query = $request->all();
+        if (request('name') != NULL) {
+            $menus = Menu::where('name', 'like', '%' . request('name') . '%')->orderBy('updated_at', 'desc')->paginate(10);
+        } else {
+            $menus = Menu::orderBy('updated_at', 'desc')->paginate(10);
+        }
+        return view('menu.view')->with('menus', $menus)->with('query', $query);
     }
 
-    public function indexCategory($id)
+    public function indexCategory(Request $request, $id)
     {
-        $menus = Menu::where('category_id', $id)->get();
-        $cat = Category::find($id);
-        return view('menu.view')->with('menus', $menus)->with('cat', $cat);
+        $query = $request->all();
+        if (request('name') != NULL) {
+            $menus = Menu::where('category_id', $id)->where('name', 'like', '%' . request('name') . '%')->orderBy('updated_at', 'desc')->paginate(10);
+        } else {
+            $menus = Menu::where('category_id', $id)->orderBy('updated_at', 'desc')->paginate(10);
+        }
+
+        $category = Category::find($id);
+        return view('menu.view')->with('menus', $menus)->with('query', $query)->with('cat', $category);
     }
 
 

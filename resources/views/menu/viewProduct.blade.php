@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container pt-5">
-        <a href="/menu" class="btn btn-primary mb-3"><i class="bi bi-backspace"></i> Back</a>
+        <a href="{{ URL::previous() }}" class="btn btn-primary mb-3"><i class="bi bi-backspace"></i> Back</a>
     </div>
     <div class="container mt-auto pt-4">
         <div class="row">

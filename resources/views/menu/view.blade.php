@@ -4,10 +4,11 @@
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-8">
-                <form action="">
+                <form method="GET" enctype="multipart/form-data" role="search">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Enter Menu Name" aria-label="Enter Menu Name"
-                            aria-describedby="button-addon2">
+                            aria-describedby="button-addon2" name="name"
+                            value="@if (isset($query['name'])) {{ $query['name'] }} @endif">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                     </div>
                 </form>
@@ -50,23 +51,36 @@
                         id="menu">
                         <h4 class="mb-3 w-100 text-center text-md-start">Categories</h4>
 
+                        @php
+                            $linkCat = '/menu';
+                            if (isset($query['name'])) {
+                                $linkCat = $linkCat . '?name=' . $query['name'];
+                            }
+                        @endphp
 
                         <li class="nav-item w-100 px-2 py-1 rounded-2"
                             @empty($cat) style="background-color: #DA291C" @endempty>
-                            <a href="/menu"
+                            <a href="{{ $linkCat }}"
                                 class="nav-link px-sm-0 px-2 text-center text-md-start @empty($cat) {{ 'text-light' }} @else {{ 'text-dark' }} @endempty">All</a>
                         </li>
                         @foreach ($categories as $category)
+                            @php
+                                $linkCat = '/menu/category/' . $category->id;
+                                if (isset($query['name'])) {
+                                    $linkCat = $linkCat . '?name=' . $query['name'];
+                                }
+                            @endphp
+
                             @empty($cat)
                                 <li class="nav-item w-100 px-2 py-1 rounded-2">
-                                    <a href="/menu/category/{{ $category->id }}"
+                                    <a href="{{ $linkCat }}"
                                         class="nav-link px-sm-0 px-2 text-center text-md-start text-dark">{{ $category->name }}</a>
                                 </li>
                             @else
                                 <li class="nav-item w-100 px-2 py-1 rounded-2"
                                     @if ($cat->id == $category->id) style="background-color: #DA291C" @endif>
-                                    <a href="/menu/category/{{ $category->id }}"
-                                        class="nav-link px-sm-0 px-2 text-center text-md-start @if($cat->id == $category->id) {{ 'text-light' }} @else {{ 'text-dark' }} @endif">{{ $category->name }}</a>
+                                    <a href="{{ $linkCat }}"
+                                        class="nav-link px-sm-0 px-2 text-center text-md-start @if ($cat->id == $category->id) {{ 'text-light' }} @else {{ 'text-dark' }} @endif">{{ $category->name }}</a>
                                 </li>
                             @endempty
                         @endforeach
@@ -77,7 +91,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h2>
                     @empty($cat)
-                        ALL
+                        All
                     @else
                         {{ $cat->name }}
                     @endempty
@@ -114,14 +128,34 @@
                         </div>
                     @endforeach
                 </div>
+
+                @php
+                    $paginationMenu = $menus;
+                    if (isset($query['name'])) {
+                        $paginationMenu = $paginationMenu->appends($query);
+                    }
+                @endphp
+
                 <div class="d-flex flex-row-reverse mt-3">
                     <div aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+                            <li class="page-item {{ $paginationMenu->currentPage() == 1 ? 'disabled' : '' }}  fw-bold">
+                                <a class="page-link" href="{{ $paginationMenu->url($paginationMenu->currentPage() - 1) }}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            @for ($i = 1; $i <= $paginationMenu->lastPage(); $i++)
+                                <li class="page-item {{ $paginationMenu->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $paginationMenu->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            <li
+                                class="page-item {{ $paginationMenu->currentPage() == $paginationMenu->lastPage() ? 'disabled' : '' }} fw-bold">
+                                <a class="page-link" href="{{ $paginationMenu->url($paginationMenu->currentPage() + 1) }}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
