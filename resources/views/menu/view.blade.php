@@ -19,6 +19,28 @@
         </div>
     </div>
     {{-- @endif --}}
+
+    @if (session()->has('success'))
+        <div data-bs-toggle="modal" data-bs-target="#successModal"></div>
+
+        <script>
+            window.onload = () => {
+                document.querySelector('[data-bs-target="#successModal"]').click();
+            }
+        </script>
+
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="container-fluid pt-2">
         <div class="row">
             <div class="col-12 col-lg-2 col-md-3 px-0 mb-4 d-flex">
@@ -56,15 +78,21 @@
                 <div class="row row-cols-1 row-cols-md-5 g-4">
                     @for ($i = 1; $i <= 10; $i++)
                         <div class="col">
-                            <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" class="card-img-top mx-auto"
-                                    alt="..." style="height: 10vw; width: 10vw;">
-                                <div class="card-body">
+                            <div class="card w-100">
+                                <img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" class="card-img-top mx-auto w-75"
+                                    alt="...">
+                                <div class="card-body d-flex flex-md-column justify-content-between align-items-center w-100 mx-1">
                                     <a href="/menu/view/{{ $i }}"
                                         class="stretched-link text-decoration-none text-dark">
-                                        <p class="card-title fw-bold mb-0">Vaporeon {{ $i }} </p>
-                                        <p class="card-text">Rp 10.000</p>
+                                        <div class="d-flex flex-column">
+                                            <p class="card-title fw-bold mb-0">Vaporeon {{ $i }} </p>
+                                            <p class="card-text">Rp 10.000</p>
+                                        </div>
                                     </a>
+                                    <div class="d-flex pt-md-4">
+                                        <a href="#" class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="#" class="btn btn-danger me-2"><i class="bi bi-trash"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
