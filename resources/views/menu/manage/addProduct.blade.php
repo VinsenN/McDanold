@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container pt-5">
-        <a href="{{ url()->previous() }}" class="btn btn-primary mb-3"><i class="bi bi-backspace"></i> Back</a>
+        <a href="/menu" class="btn btn-primary mb-3"><i class="bi bi-backspace"></i> Back</a>
         <form action="{{ route('admin.addMenu') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="text-center fw-bold">

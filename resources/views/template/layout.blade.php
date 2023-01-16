@@ -58,11 +58,13 @@
                                 href="/login">Login</a>
                         </li>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/cart">
-                                <i class="bi bi-cart"></i>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'user')
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/cart">
+                                    <i class="bi bi-cart"></i>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a href="#"
                                 class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"
