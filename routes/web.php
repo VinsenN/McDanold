@@ -49,23 +49,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 
     Route::get('/profile', [UserController::class, 'index']);
-    Route::post('/profile/update/image', [UserController::class, 'updateImage']) -> name('user.updateImage');
-    Route::post('/profile/update/info', [UserController::class, 'updateInfo']) -> name('user.updateInfo');
-    Route::post('/profile/update/password', [UserController::class, 'updatePassword']) -> name('user.updatePassword');
-
-    Route::get('/cart', function () {
-        return view('user.cart');
-    });
-
-    Route::get('/menu/add', [MenuController::class, 'addIndex']);
-    Route::post('/menu/add', [MenuController::class, 'addAction']) -> name('admin.addMenu');
+    Route::post('/profile/update/image', [UserController::class, 'updateImage'])->name('user.updateImage');
+    Route::post('/profile/update/info', [UserController::class, 'updateInfo'])->name('user.updateInfo');
+    Route::post('/profile/update/password', [UserController::class, 'updatePassword'])->name('user.updatePassword');
 
     Route::get('/order', function () {
         return view('user.order');
     });
 
     Route::middleware(['role:user'])->group(function () {
+        Route::get('/cart', function () {
+            return view('user.cart');
+        });
     });
     Route::middleware(['role:admin'])->group(function () {
+        Route::get('/menu/add', [MenuController::class, 'addIndex']);
+        Route::post('/menu/add', [MenuController::class, 'addAction'])->name('admin.addMenu');
+
+        Route::get('/menu/{id}/edit', [MenuController::class, 'updateIndex']);
+        Route::post('/menu/{id}/edit', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
+
+        Route::post('/menu/{id}/delete', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
     });
 });
