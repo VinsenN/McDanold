@@ -59,9 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:user'])->group(function () {
         Route::post('/menu/{id}/add', [TransactionController::class, 'addCart'])->name('user.addCart');
 
-        Route::get('/cart', function () {
-            return view('user.cart');
-        });
+        Route::get('/cart', [TransactionController::class, 'indexCart'])->name('user.viewCart');
+        Route::post('/cart/remove/{id}', [TransactionController::class, 'removeCart'])->name('user.removeCart');
+        Route::post('/cart/purchase', [TransactionController::class, 'purchaseCart'])->name('user.purchaseCart');
     });
 
     Route::middleware(['role:admin'])->group(function () {

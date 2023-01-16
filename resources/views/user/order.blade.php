@@ -1,6 +1,27 @@
 @extends('template.layout')
 
 @section('content')
+    @if (session()->has('success'))
+        <div data-bs-toggle="modal" data-bs-target="#successModal"></div>
+
+        <script>
+            window.onload = () => {
+                document.querySelector('[data-bs-target="#successModal"]').click();
+            }
+        </script>
+
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i
+                                class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="container mt-5">
         <div class="accordion">
             @for ($i = 1; $i <= 5; $i++)
