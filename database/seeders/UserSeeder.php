@@ -16,21 +16,38 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Yilon Ma',
-            'email' => 'yilonma@gmail.com',
+            'name' => 'Vinsen Nawir',
+            'email' => 'vinsennawir@gmail.com',
             'password' => Hash::make(12345678),
             'gender' => 'Male',
-            'date_of_birth' => '2003-04-01',
+            'date_of_birth' => '2000-01-01',
             'image_path' => null,
-            'role' => 'user',
+            'role' => 'admin',
         ]);
-
         DB::table('users')->insert([
-            'name' => 'Lao Gan Ma',
-            'email' => 'laoganma@gmail.com',
+            'name' => 'Gregorius Emmanuel Henry',
+            'email' => 'gregorius.henry@gmail.com',
             'password' => Hash::make(12345678),
-            'gender' => 'Female',
-            'date_of_birth' => '2002-04-01',
+            'gender' => 'Male',
+            'date_of_birth' => '2000-01-01',
+            'image_path' => null,
+            'role' => 'admin',
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Vio Albert Ferdinand ',
+            'email' => 'vio.ferdinand@gmail.com',
+            'password' => Hash::make(12345678),
+            'gender' => 'Male',
+            'date_of_birth' => '2000-01-01',
+            'image_path' => null,
+            'role' => 'admin',
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Francis Alexander',
+            'email' => 'francis.alexander@gmail.com',
+            'password' => Hash::make(12345678),
+            'gender' => 'Male',
+            'date_of_birth' => '2000-01-01',
             'image_path' => null,
             'role' => 'admin',
         ]);

@@ -92,7 +92,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            @if (auth()->user()->role == 'admin')
+                            @if (auth()->user()->role == 'admin' and $order->status == 1)
                                 <form action="{{ route('admin.finishOrder', ['id' => $order->id]) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf

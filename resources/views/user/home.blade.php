@@ -13,12 +13,8 @@
         <div class="carousel-inner">
             @for ($i = 1; $i <= 3; $i++)
                 <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
-                    <img src="https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/12/12/905998228.jpeg"
+                    <img src="/image/carousel/carousel-{{ $i }}.jpg"
                         class="d-block w-100" alt="" height="500px" width=auto>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $i }} slide label</h5>
-                        <p>Some representative placeholder content for the {{ $i }} slide.</p>
-                    </div>
                 </div>
             @endfor
         </div>
