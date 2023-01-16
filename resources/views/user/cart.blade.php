@@ -40,9 +40,18 @@
                 @endphp
                 @foreach ($order->orderDetails as $orderDetail)
                     <tr class="align-middle">
+                        @php
+                            $multiplier = 1;
+                            if ($orderDetail->size == 'Large') {
+                                $multiplier = 2;
+                            }
+                            $price = $orderDetail->quantity * ($orderDetail->menu->price * $multiplier);
+                            $totalPrice += $price;
+                            $exist = 1;
+                        @endphp
                         <td> {{ $orderDetail->menu->name }} </td>
                         <td> {{ $orderDetail->size }}</td>
-                        <td>IDR {{ $orderDetail->menu->price }}</td>
+                        <td>IDR {{ $price }}</td>
                         <td>{{ $orderDetail->quantity }} </td>
                         <td>
                             <form action="{{ route('user.removeCart', ['id' => $orderDetail->id]) }}" method="POST"
@@ -52,14 +61,6 @@
                                     class="bi bi-trash3-fill text-danger border-0 bg-transparent"></button>
                             </form>
                         </td>
-                        @php
-                            $multiplier = 1;
-                            if ($orderDetail->size == 2) {
-                                $multiplier = 2;
-                            }
-                            $totalPrice += $orderDetail->quantity * ($orderDetail->menu->price * $multiplier);
-                            $exist = 1;
-                        @endphp
                     </tr>
                 @endforeach
                 <tr class="align-middle">
@@ -72,7 +73,8 @@
 
         <form action="{{ route('user.purchaseCart') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <button type="submit" class="btn btn-success float-end" @empty($exist) disabled @endempty>Purchase</button>
+            <button type="submit" class="btn btn-success float-end"
+                @empty($exist) disabled @endempty>Purchase</button>
         </form>
     </div>
 @endsection

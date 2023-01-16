@@ -168,9 +168,8 @@
                     </div>
                 </div>
                 @if (Auth::check() && auth()->user()->role == 'user')
-                    <div class="p-2 px-3 border rounded d-flex justify-content-between align-items-center">
-                        <div><span class="fw-semibold">Total Price: </span> Rp 30.000</div>
-                        <button type="button" class="btn btn-success">Check Out</button>
+                    <div class="p-2 px-3 border rounded d-flex flex-row-reverse justify-content-between align-items-center">
+                        <button type="button" class="btn btn-success float-end">Check Out</button>
                     </div>
                 @endif
             </main>

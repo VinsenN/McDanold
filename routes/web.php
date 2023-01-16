@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -52,9 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update/info', [UserController::class, 'updateInfo'])->name('user.updateInfo');
     Route::post('/profile/update/password', [UserController::class, 'updatePassword'])->name('user.updatePassword');
 
-    Route::get('/order', function () {
-        return view('user.order');
-    });
+    Route::get('/order', [OrderController::class, 'orderIndex']);
 
     Route::middleware(['role:user'])->group(function () {
         Route::post('/menu/{id}/add', [TransactionController::class, 'addCart'])->name('user.addCart');
@@ -72,5 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/menu/{id}/update', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
 
         Route::delete('/menu/{id}/delete', [MenuController::class, 'deleteAction'])->name('admin.deleteMenu');
+
+        Route::post('/order/{id}', [OrderController::class, 'orderFinish'])->name('admin.finishOrder');
     });
 });

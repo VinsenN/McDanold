@@ -23,6 +23,6 @@ class Order extends Model
 
     public function transactionDetails()
     {
-        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+        return $this->hasMany(TransactionDetail::class, 'order_id', 'id');
     }
 }

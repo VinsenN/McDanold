@@ -24,14 +24,26 @@
     @endif
     <div class="container mt-5">
         <div class="accordion">
-            @for ($i = 1; $i <= 5; $i++)
+            @php
+                $i = 0;
+            @endphp
+            @foreach ($orders as $order)
                 <div class="accordion-item my-4 border">
                     <h2 class="accordion-header" id="heading{{ $i }}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse{{ $i }}" aria-expanded="false"
                             aria-controls="collapse{{ $i }}">
-                            Order {{ $i }}
-                            @if ($i == 1)
+
+                            <span>
+                                @if (auth()->user()->role == 'admin')
+                                    <span class="fw-semibold">Order {{ $order->id }}</span> - {{ $order->created_at }},
+                                    by
+                                    <span class="fw-semibold">{{ $order->user->name }}</span>
+                                @else
+                                    <span class="fw-semibold">Order {{ $order->id }}</span> - {{ $order->created_at }}
+                                @endif
+                            </span>
+                            @if ($order->status == 1)
                                 <span class="btn btn-warning mx-2">Pending</span>
                             @else
                                 <span class="btn btn-success mx-2">Done</span>
@@ -52,26 +64,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($j = 1; $j <= 3; $j++)
+                                    @php
+                                        $totalTrans = 0;
+                                    @endphp
+                                    @foreach ($order->transactionDetails as $transactionDetail)
                                         <tr class="align-middle">
-                                            <td>Vaporeon {{ $j }}</td>
-                                            <td>Big</td>
-                                            <td>IDR 10000</td>
-                                            <td>5</td>
-                                            <td>IDR 50000</td>
+                                            <td> {{ $transactionDetail->order_menu_name }} </td>
+                                            <td> {{ $transactionDetail->order_menu_size }} </td>
+                                            <td>IDR {{ $transactionDetail->order_menu_price }} </td>
+                                            <td> {{ $transactionDetail->order_menu_quantity }} </td>
+
+                                            @php
+                                                $multiplier = 1;
+                                                if ($transactionDetail->order_menu_size == 'Large') {
+                                                    $multiplier = 2;
+                                                }
+                                                $totalMenuPrice = $transactionDetail->order_menu_price * $transactionDetail->order_menu_quantity * $multiplier;
+                                                $totalTrans += $totalMenuPrice;
+                                            @endphp
+                                            <td>IDR {{ $totalMenuPrice }}</td>
                                         </tr>
-                                    @endfor
+                                    @endforeach
                                     <tr class="align-middle">
                                         <th scope="row">Sum</th>
                                         <td colspan="3"></td>
-                                        <td class="fw-bold">IDR 300000</td>
+                                        <td class="fw-bold">IDR {{ $totalTrans }} </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            @if (auth()->user()->role == 'admin')
+                                <form action="{{ route('admin.finishOrder', ['id' => $order->id]) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Finish Order</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
-            @endfor
+                @php
+                    $i += 1;
+                @endphp
+            @endforeach
         </div>
     </div>
 @endsection
