@@ -95,7 +95,7 @@ class MenuController extends Controller
         ]);
 
         $menu = Menu::find($id);
-        // dd($menu);
+
         $menu->name = $validated['name'];
         $menu->category_id = $validated['category_id'];
         $menu->description = $validated['description'];

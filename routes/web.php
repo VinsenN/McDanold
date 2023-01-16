@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,18 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.home');
 });
-
 Route::get('/home', function () {
     return redirect('/');
 });
 
 Route::get('/menu', [MenuController::class, 'index']);
 Route::get('/menu/category/{id}', [MenuController::class, 'indexCategory']);
-
 Route::get('/menu/category/', function () {
     return redirect('/menu');
 });
-
 Route::get('/menu/view/{id}', [MenuController::class, 'indexMenu']);
 
 Route::get('/about-us', function () {
@@ -59,10 +57,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['role:user'])->group(function () {
+        Route::post('/menu/{id}/add', [TransactionController::class, 'addCart'])->name('user.addCart');
+
         Route::get('/cart', function () {
             return view('user.cart');
         });
     });
+
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/menu/add', [MenuController::class, 'addIndex']);
         Route::post('/menu/add', [MenuController::class, 'addAction'])->name('admin.addMenu');
