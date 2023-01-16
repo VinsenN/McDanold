@@ -28,8 +28,8 @@
     </div>
     <div class="container mt-auto pt-4">
         <div class="row">
-            <div class="col-sm-5 d-flex align-items-center justify-content-center">
-                <img src="/storage/images/{{ $menu->photo }}" alt="..." style="height: 15vw; width: 15vw;">
+            <div class="col-sm-5 d-flex align-items-center justify-content-center mb-4">
+                <img src="/storage/images/{{ $menu->photo }}" alt="..." style="min-width: 100%">
             </div>
             <div class="col-sm-6">
                 <p class="fs-4 fw-bold m-0">

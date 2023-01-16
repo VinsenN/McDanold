@@ -77,7 +77,7 @@
                     Recommended
                 </label>
             </div>
-            <button type="submit" class="btn btn-success mb-4 px-4">Add Menu</button>
+            <button type="submit" class="btn btn-success mb-4 px-4">Update Menu</button>
         </form>
     </div>
 @endsection
