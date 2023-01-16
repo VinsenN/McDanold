@@ -47,7 +47,7 @@
                 </ul>
 
                 <ul
-                    class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center justify-content-center justify-content-lg-start">
+                    class="navbar-nav mb-2 mb-lg-0 d-flex align-items-sm-center justify-content-center justify-content-lg-start">
                     @if (!Auth::check())
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" aria-current="page"
