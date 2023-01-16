@@ -30,7 +30,7 @@
                     </span>
                 </p>
 
-                @if (auth()->user()->role == 'user')
+                @if (Auth::check() && auth()->user()->role == 'user')
                     <form>
                         <div class="mb-3">
                             <p class="fw-semibold mb-2">Size: </p>
