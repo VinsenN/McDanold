@@ -19,7 +19,7 @@ class CreateMenusTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->string('photo');
-            $table->integer('is_recommended');
+            $table->integer('is_recommended')->default(0);
             $table->foreignId('category_id');
             $table->softDeletes();
 

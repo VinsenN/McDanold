@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -56,9 +57,8 @@ Route::middleware(['auth'])->group(function () {
         return view('user.cart');
     });
 
-    Route::get('/menu/add', function () {
-        return view('menu.manage.addProduct');
-    });
+    Route::get('/menu/add', [MenuController::class, 'addIndex']);
+    Route::post('/menu/add', [MenuController::class, 'addAction']) -> name('admin.addMenu');
 
     Route::get('/order', function () {
         return view('user.order');
