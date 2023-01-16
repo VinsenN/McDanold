@@ -6,13 +6,42 @@ use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 
 class MenuController extends Controller
 {
-    public function addIndex()
+    public function __construct()
     {
         $categories = Category::get();
-        return view('menu.manage.addProduct')->with('categories', $categories);
+        View::share('categories', $categories);
+    }
+
+    public function index()
+    {
+        $menus = Menu::get();
+        return view('menu.view')->with('menus', $menus);
+    }
+
+    public function indexCategory($id)
+    {
+        $menus = Menu::where('category_id', $id)->get();
+        $cat = Category::find($id);
+        return view('menu.view')->with('menus', $menus)->with('cat', $cat);
+    }
+
+
+
+
+
+
+    public function indexMenu($id)
+    {
+        $menu = Menu::find($id);
+        return view('menu.viewProduct')->with('menu', $menu);
+    }
+    public function addIndex()
+    {
+        return view('menu.manage.addProduct');
     }
 
     public function addAction(Request $request)
@@ -46,9 +75,8 @@ class MenuController extends Controller
 
     public function updateIndex($id)
     {
-        $categories = Category::get();
         $menu = Menu::find($id);
-        return view('menu.manage.updateProduct')->with('categories', $categories)->with('menu', $menu);
+        return view('menu.manage.updateProduct')->with('menu', $menu);
     }
 
     public function updateAction(Request $request, $id)
@@ -60,28 +88,30 @@ class MenuController extends Controller
             "price" => "required|integer",
         ]);
 
-        $menu = new Menu();
+        $menu = Menu::find($id);
+        // dd($menu);
         $menu->name = $validated['name'];
         $menu->category_id = $validated['category_id'];
         $menu->description = $validated['description'];
         $menu->price = $validated['price'];
 
-        Storage::delete('public/images/' . $menu->photo);
+        if ($request->photo != null) {
+            Storage::delete('public/images/' . $menu->photo);
 
-        $imageFile = $validated['photo'];
-        $imageName = 'menu' . time() . '.' . $imageFile->getClientOriginalExtension();
-        $menu->photo = $imageName;
+            $imageFile = $request->photo;
+            $imageName = 'menu' . time() . '.' . $imageFile->getClientOriginalExtension();
+            $menu->photo = $imageName;
 
+            Storage::putFileAs('public/images', $imageFile, $imageName);
+        }
         $menu->is_recommended = $request->is_recommended == null ? 0 : 1;
-
-        Storage::putFileAs('public/images', $imageFile, $imageName);
 
         $menu->save();
 
         return redirect('/menu')->with('success', 'Update menu success');
     }
 
-    public function delete($id)
+    public function deleteAction($id)
     {
         $menu = Menu::find($id);
         $old_name = $menu->name;
@@ -89,6 +119,6 @@ class MenuController extends Controller
         Storage::delete('public/images/' . $menu->photo);
         $menu->delete();
 
-        return redirect('/menu')->with('success', 'Delete '.$old_name.' menu success');
+        return redirect('/menu')->with('success', 'Delete ' . $old_name . ' menu success');
     }
 }

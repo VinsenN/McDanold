@@ -1,24 +1,24 @@
 @extends('template.layout')
 
 @section('content')
-    {{-- @if (auth()->user()->role == 'admin') --}}
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-8">
                 <form action="">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Enter Menu Name"
-                            aria-label="Enter Menu Name" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" placeholder="Enter Menu Name" aria-label="Enter Menu Name"
+                            aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                     </div>
                 </form>
             </div>
             <div class="col-4">
-                <a href="/menu/add" class="btn btn-success float-end me-2">Add Menu</a>
+                @if (auth()->user()->role == 'admin')
+                    <a href="/menu/add" class="btn btn-success float-end me-2">Add Menu</a>
+                @endif
             </div>
         </div>
     </div>
-    {{-- @endif --}}
 
     @if (session()->has('success'))
         <div data-bs-toggle="modal" data-bs-target="#successModal"></div>
@@ -33,7 +33,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
+                        <h1 class="modal-title text-success fs-5" id="successModalLabel"><i
+                                class="bi bi-check-circle-fill"></i> {{ session()->get('success') }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 </div>
@@ -49,54 +50,69 @@
                         id="menu">
                         <h4 class="mb-3 w-100 text-center text-md-start">Categories</h4>
 
-                        <li class="nav-item w-100 px-2 py-1 rounded-2" style="background-color: #DA291C">
-                            <a href="#" class="nav-link px-sm-0 px-2 text-light text-center text-md-start">Food X</a>
-                        </li>
 
-                        <li class="nav-item w-100 px-2 py-1 rounded-2">
-                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Y</a>
+                        <li class="nav-item w-100 px-2 py-1 rounded-2"
+                            @empty($cat) style="background-color: #DA291C" @endempty>
+                            <a href="/menu"
+                                class="nav-link px-sm-0 px-2 text-center text-md-start @empty($cat) {{ 'text-light' }} @else {{ 'text-dark' }} @endempty">All</a>
                         </li>
-
-                        <li class="nav-item w-100 px-2 py-1 rounded-2">
-                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Z</a>
-                        </li>
-
-                        <li class="nav-item w-100 px-2 py-1 rounded-2">
-                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Food Sus</a>
-                        </li>
-
-                        <li class="nav-item w-100 px-2 py-1 rounded-2">
-                            <a href="#" class="nav-link px-sm-0 px-2 text-dark text-center text-md-start">Drinks</a>
-                        </li>
-
+                        @foreach ($categories as $category)
+                            @empty($cat)
+                                <li class="nav-item w-100 px-2 py-1 rounded-2">
+                                    <a href="/menu/category/{{ $category->id }}"
+                                        class="nav-link px-sm-0 px-2 text-center text-md-start text-dark">{{ $category->name }}</a>
+                                </li>
+                            @else
+                                <li class="nav-item w-100 px-2 py-1 rounded-2"
+                                    @if ($cat->id == $category->id) style="background-color: #DA291C" @endif>
+                                    <a href="/menu/category/{{ $category->id }}"
+                                        class="nav-link px-sm-0 px-2 text-center text-md-start @if($cat->id == $category->id) {{ 'text-light' }} @else {{ 'text-dark' }} @endif">{{ $category->name }}</a>
+                                </li>
+                            @endempty
+                        @endforeach
                     </ul>
                 </div>
             </div>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h2>Food Y</h2>
+                <h2>
+                    @empty($cat)
+                        ALL
+                    @else
+                        {{ $cat->name }}
+                    @endempty
+                </h2>
                 <div class="row row-cols-1 row-cols-md-5 g-4">
-                    @for ($i = 1; $i <= 10; $i++)
+                    @foreach ($menus as $menu)
                         <div class="col">
                             <div class="card w-100">
-                                <img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" class="card-img-top mx-auto w-75"
-                                    alt="...">
-                                <div class="card-body d-flex flex-md-column justify-content-between align-items-center w-100 mx-1">
-                                    <a href="/menu/view/{{ $i }}"
-                                        class="stretched-link text-decoration-none text-dark">
+                                <div
+                                    class="card-body d-flex flex-md-column justify-content-between align-items-center w-100 mx-1 p-0 text-center">
+                                    <a href="/menu/view/{{ $menu->id }}" class="text-decoration-none text-dark w-100">
+                                        <img src="/storage/images/{{ $menu->photo }}"
+                                            class="card-img-top mx-auto w-75 py-3" alt="...">
                                         <div class="d-flex flex-column">
-                                            <p class="card-title fw-bold mb-0">Vaporeon {{ $i }} </p>
-                                            <p class="card-text">Rp 10.000</p>
+                                            <p class="card-title fw-bold mb-0"> {{ $menu->name }} @if ($menu->is_recommended)
+                                                    <i class="bi bi-fire text-danger"></i>
+                                                @endif
+                                            </p>
+                                            <p class="card-text">IDR {{ $menu->price }}</p>
                                         </div>
                                     </a>
-                                    <div class="d-flex pt-md-4">
-                                        <a href="#" class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i></a>
-                                        <a href="#" class="btn btn-danger me-2"><i class="bi bi-trash"></i></a>
+                                    <div class="d-flex pt-md-4 mb-4">
+                                        <a href="/menu/{{ $menu->id }}/update" class="btn btn-warning me-2"><i
+                                                class="bi bi-pencil-square"></i></a>
+                                        <form method="POST" action="{{ route('admin.deleteMenu', ['id' => $menu->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger me-2"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <div class="d-flex flex-row-reverse mt-3">
                     <div aria-label="Page navigation example">
@@ -109,10 +125,12 @@
                         </ul>
                     </div>
                 </div>
-                <div class="p-2 px-3 border rounded d-flex justify-content-between align-items-center">
-                    <div><span class="fw-semibold">Total Price: </span> Rp 30.000</div>
-                    <button type="button" class="btn btn-success">Check Out</button>
-                </div>
+                @if (auth()->user()->role == 'user')
+                    <div class="p-2 px-3 border rounded d-flex justify-content-between align-items-center">
+                        <div><span class="fw-semibold">Total Price: </span> Rp 30.000</div>
+                        <button type="button" class="btn btn-success">Check Out</button>
+                    </div>
+                @endif
             </main>
         </div>
     </div>

@@ -2,31 +2,29 @@
 
 @section('content')
     <div class="container mt-auto pt-5">
+        <a href="/menu" class="btn btn-primary mb-3"><i class="bi bi-backspace"></i> Back</a>
         <div class="row">
             <div class="col-sm-5 d-flex align-items-center justify-content-center">
-                <img src="https://m.media-amazon.com/images/I/51T-K7TreuL.jpg" alt="..."
-                    style="height: 15vw; width: 15vw;">
+                <img src="/storage/images/{{ $menu->photo }}" alt="..." style="height: 15vw; width: 15vw;">
             </div>
             <div class="col-sm-6">
                 <p class="fs-4 fw-bold">
-                    Vaporeon
+                    {{ $menu->name }} @if ($menu->is_recommended)
+                        <i class="bi bi-fire text-danger"></i>
+                    @endif
                 </p>
 
                 <p class="fw-semibold">
                     Price:
                     <span class="fw-normal">
-                        IDR 30000
+                        IDR {{ $menu->price }}
                     </span>
                 </p>
 
                 <p class="fw-semibold">
                     Description:
                     <span class="fw-normal">
-                        Hey guys, did you know that in terms of male human and female Pokémon breeding, Vaporeon is the most
-                        compatible Pokémon for humans? Not only are they in the field egg group, which is mostly comprised
-                        of mammals, Vaporeon are an average of 3"03' tall and 63.9 pounds. this means they're large enough
-                        to be able to handle human dicks, and with their impressive Base Stats for HP and access to Acid
-                        Armor, you can be rough with one.
+                        {{ $menu->description }}
                     </span>
                 </p>
 

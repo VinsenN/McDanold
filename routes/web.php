@@ -25,13 +25,14 @@ Route::get('/home', function () {
     return redirect('/');
 });
 
-Route::get('/menu', function () {
-    return view('menu.view');
+Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/menu/category/{id}', [MenuController::class, 'indexCategory']);
+
+Route::get('/menu/category/', function () {
+    return redirect('/menu');
 });
 
-Route::get('/menu/view/{id}', function () {
-    return view('menu.viewProduct');
-});
+Route::get('/menu/view/{id}', [MenuController::class, 'indexMenu']);
 
 Route::get('/about-us', function () {
     return view('user.about-us');
@@ -66,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/menu/add', [MenuController::class, 'addIndex']);
         Route::post('/menu/add', [MenuController::class, 'addAction'])->name('admin.addMenu');
 
-        Route::get('/menu/{id}/edit', [MenuController::class, 'updateIndex']);
-        Route::post('/menu/{id}/edit', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
+        Route::get('/menu/{id}/update', [MenuController::class, 'updateIndex']);
+        Route::post('/menu/{id}/update', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
 
-        Route::post('/menu/{id}/delete', [MenuController::class, 'updateAction'])->name('admin.updateMenu');
+        Route::delete('/menu/{id}/delete', [MenuController::class, 'deleteAction'])->name('admin.deleteMenu');
     });
 });
