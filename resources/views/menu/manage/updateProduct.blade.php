@@ -60,7 +60,7 @@
                 <label for="imageInput" class="form-label fw-semibold">Image</label>
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <img src="/storage/images/{{ $menu->photo }}" class="card-img-top w-25 py-3" alt="...">
+                        <img src="{{ URL::asset('storage/public/images/'.$menu->photo) }}" class="card-img-top w-25 py-3" alt="...">
                         <input type="file" class="form-control @error('photo') is-invalid @enderror" id="imageInput"
                             name="photo">
                     </div>
