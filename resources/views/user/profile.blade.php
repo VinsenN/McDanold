@@ -26,7 +26,9 @@
             <div class="col-md-3 me-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle border-dark my-3" width="200px" height="200px"
-                        src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }} @else /storage/images/{{ auth()->user()->image_path }} @endif">
+                        src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }}
+                            @else
+                                {{ URL::asset('storage/public/images/' . auth()->user()->image_path) }} @endif">
 
                     <p class="font-weight-bold
                         mb-2">{{ auth()->user()->name }}</p>
