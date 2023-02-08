@@ -103,7 +103,7 @@
                                 <div
                                     class="card-body d-flex flex-column justify-content-between align-items-center w-100 mx-1 px-0 text-center">
                                     <a href="/menu/view/{{ $menu->id }}" class="text-decoration-none text-dark w-100 mb-3">
-                                        <div class="d-block mx-auto w-75 m-0 mb-2 p-0 border border-dark"
+                                        <div class="d-block mx-auto w-75 m-0 mb-2 p-0"
                                              id="menu-image">
                                             <img src="{{ URL::asset('storage/public/images/'.$menu->photo) }}"
                                                 class="card-img-top mx-auto w-100 h-100" alt="...">

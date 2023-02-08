@@ -51,7 +51,11 @@
                         {{ $menu->description }}
                     </span>
                 </p>
-
+                @if (!Auth::check())
+                    <p class="text-danger fw-semibold">
+                        Please <a href="/login" class="text-danger">login</a> to your account to order this Product.
+                    </p>
+                @endif
                 @if (Auth::check() && auth()->user()->role == 'user')
                     <form action="{{ route('user.addCart', ['id' => $menu->id]) }}" method="POST"
                         enctype="multipart/form-data">

@@ -39,6 +39,11 @@
                             <input type="file" onchange="form.submit()" style="display: none" name="file">
                             <i class="fa fa-cloud-upload"></i> Upload Image
                         </label>
+                        @error('file')
+                            <div class="text-danger pt-1">
+                                <p>{{ $errors->first('file') }}</p>
+                            </div>
+                        @enderror
                     </form>
                 </div>
             </div>

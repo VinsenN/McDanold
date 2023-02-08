@@ -22,7 +22,29 @@
             </div>
         </div>
     @endif
-    <div class="container mt-5">
+
+    <div class="container mt-5 mb-2">
+        <form method="GET" enctype="multipart/form-data" role="search">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter" id="allRadio" value="all"
+                    @if ($status == 0) checked @endif>
+                <label class="form-check-label fw-semibold" for="allRadio">All</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter" id="pendingRadio" value="pending"
+                    @if ($status == 1) checked @endif>
+                <label class="form-check-label text-warning fw-semibold" for="pendingRadio">Pending</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter" id="doneRadio" value="done"
+                    @if ($status == 2) checked @endif>
+                <label class="form-check-label text-success fw-semibold" for="doneRadio">Done</label>
+            </div>
+            <button type="submit" class="btn btn-info">Apply</button>
+        </form>
+    </div>
+
+    <div class="container">
         <div class="accordion">
             @php
                 $i = 0;
@@ -36,11 +58,13 @@
 
                             <span>
                                 @if (auth()->user()->role == 'admin')
-                                    <span class="fw-semibold">Order {{ $order->id }}</span> - {{ $order->created_at }},
+                                    <span class="fw-semibold">Order {{ $order->id }}</span> - {{ $order->created_at }}
+                                    GMT+7,
                                     by
                                     <span class="fw-semibold">{{ $order->user->name }}</span>
                                 @else
                                     <span class="fw-semibold">Order {{ $order->id }}</span> - {{ $order->created_at }}
+                                    GMT+7
                                 @endif
                             </span>
                             @if ($order->status == 1)

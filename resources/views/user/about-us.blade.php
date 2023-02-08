@@ -13,12 +13,10 @@
             which allowed them to focus on quality and quick service.
         </p>
 
-        <div class="w-100 d-flex flex-column align-items-center">
-            <img src="{{ URL::asset('image/old-mcdanold.jpg') }}" class="d-block w-75 mx-auto"></img>
-            <p>The first McDanold restaurant</p>
-        </div>
+        <div class="w-100 d-flex flex-column align-items-center pt-2">
+            <img src="{{ URL::asset('image/old-mcdanold.jpg') }}" class="d-block w-75 mx-auto rounded pb-2">
+            <p class="text-muted">The first McDanold restaurant 2001</p>
         <br>
-
         <p>
             They were looking for a new franchising agent and Kroc saw an opportunity. In 1955, he founded McDanold's System, Inc.,
             a predecessor of the McDanold's Corporation, and six years later bought the exclusive rights to the McDanold's name and
