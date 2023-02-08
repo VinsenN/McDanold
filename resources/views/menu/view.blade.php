@@ -105,7 +105,7 @@
                                     <a href="/menu/view/{{ $menu->id }}" class="text-decoration-none text-dark w-100 mb-3">
                                         <div class="d-block mx-auto w-75 m-0 mb-2 p-0 border border-dark"
                                              id="menu-image">
-                                            <img src="/storage/images/{{ $menu->photo }}"
+                                            <img src="{{ URL::asset('storage/public/images/'.$menu->photo) }}"
                                                 class="card-img-top mx-auto w-100 h-100" alt="...">
                                         </div>
                                         <div class="d-flex flex-column me-2">

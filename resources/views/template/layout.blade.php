@@ -69,7 +69,7 @@
                             <a href="#"
                                 class="nav-link d-block link-dark text-decoration-none dropdown-toggle show"
                                 data-bs-toggle="dropdown" aria-expanded="true">
-                                <img src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }} @else /storage/images/{{ auth()->user()->image_path }} @endif"
+                                <img src="@if (auth()->user()->image_path == null) {{ URL::to('image/default-user.jpg') }} @else {{ URL::asset('storage/public/images/'.auth()->user()->image_path) }}   @endif"
                                     alt="mdo" width="25" height="25" class="rounded-circle">
                             </a>
                             <ul class="dropdown-menu text-small shadow text-secondary"
