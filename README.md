@@ -20,6 +20,15 @@ Web Application Deployment Link: https://mcdanold.000webhostapp.com/
 | [Vinsen Nawir](https://github.com/VinsenN)                                                                           | [Vio Albert Ferdinand](https://github.com/VioAlbert)                                                                 | [Gregorius Emmanuel Henry](https://github.com/jfcjaya)                                                               | [Francis Alexander](https://github.com/francisalexander02)                                                                    |    
 | 2440031521                                                                                                           | 2440017126                                                                                                           | 2440030582                                                                                                           | 2440017126                                                                                                           |
 
+## Tools
+* Bootstrap 5.2
+* PHP 8.1.1
+* Composer
+* Laravel 8
+* Apache
+* XAMPP
+* Website dbdiagram.io
+* Adobe Photoshop
 
 ## Database Diagram
 <img src="https://media.discordapp.net/attachments/1047505167341342800/1072707490355089468/McDanold.png?width=1191&height=663"/>
