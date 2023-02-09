@@ -10,7 +10,7 @@ Web Application Deployment Link: https://mcdanold.000webhostapp.com/
   * Create new database named `mcdanold` in phpmyadmin
   * Open .env file, MySQL database named `mcdanold` on 127.0.0.1:3306 with root username and no password. You can customize the ip address, port, database username or password based on your own machine setup.
   * Run `php artisan key:generate` to prepare all important data.
-  * Run `php artisan migrate` to create database table.
+  * Run `php artisan migrate:fresh --seed` to create database table.
   * Run `php artisan storage:link` to create storage link in public folder.
   * Run `php artisan serve` and access the webapp on localhost port 8000 (http://localhost:8000/).
 
